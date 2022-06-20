@@ -1,30 +1,23 @@
 
 package Kamen_Rider_Craft_4TH.model;
 
+import Kamen_Rider_Craft_4TH.item.rider_armor_base.RiderDriverItem;
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
+import baubles.api.cap.BaublesCapabilities;
+import baubles.api.cap.IBaublesItemHandler;
 import org.lwjgl.opengl.GL11;
 
-import Kamen_Rider_Craft_4TH.RiderItems;
 import Kamen_Rider_Craft_4TH.ShowaRiderItems;
-import Kamen_Rider_Craft_4TH.item.fourze.item_Fourzedriver;
-import Kamen_Rider_Craft_4TH.item.ooo.item_OOOdriver;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_driver;
-import Kamen_Rider_Craft_4TH.potion.PotionCore;
-import Kamen_Rider_Craft_4TH.util.Refercence;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityArmorStand;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class tokuArmorModel2 extends ModelBiped
@@ -68,7 +61,7 @@ public class tokuArmorModel2 extends ModelBiped
 	/** The Biped's Left Leg */
 	public ModelRenderer bigBipedLeftLeg2;
 	
-	public Class<? extends item_rider_driver> base;  
+	public Class<? extends RiderDriverItem> base;
 	
 	public tokuArmorModel2()
 	{
@@ -159,334 +152,346 @@ public class tokuArmorModel2 extends ModelBiped
 	
 	
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
 		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
-		float height=1;
-		float height2=0;
-		item_rider_driver belt = (item_rider_driver)ShowaRiderItems.typhoon_ichigo;
-		int[] Text= new int[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+		float height = 1;
+		float height2 = 0;
+		RiderDriverItem belt = (RiderDriverItem) ShowaRiderItems.typhoon_ichigo;
+		int[] Text = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
-		if (entity instanceof EntityLivingBase){
-			EntityLivingBase player =((EntityLivingBase) entity);
-			if (  player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof item_rider_driver){
-			belt = (item_rider_driver) player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
+		if (entity instanceof EntityLivingBase) {
+			EntityLivingBase player = ((EntityLivingBase) entity);
+			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof RiderDriverItem) {
+				belt = (RiderDriverItem) player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem();
 			}
-		}	
-		
-		if (belt.rendModle(entity,2)){
+
+			IBaublesItemHandler capability = player.getCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null);
+
+			if (capability != null) {
+				for (int i = 0; i < capability.getSlots(); i++) {
+					ItemStack stackInSlot = capability.getStackInSlot(i);
+					IBauble bauble = stackInSlot.getCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null);
+
+					if (bauble != null && bauble.getBaubleType(stackInSlot) == BaubleType.BELT && stackInSlot.getItem() instanceof RiderDriverItem) {
+						belt = (RiderDriverItem) stackInSlot.getItem();
+						break;
+					}
+				}
+			}
+		}
+
+		if (belt.rendModle(entity, 2)) {
 			GL11.glPushMatrix();
-		GL11.glScalef(1F*height, 1F*height, 1F*height);
+			GL11.glScalef(1F * height, 1F * height, 1F * height);
 
-		if (entity.isSneaking()){
-			GL11.glTranslatef(0, 0.2F, 0);
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.2F, 0);
 
-		}else {
-			GL11.glTranslatef(0, -0.02F+(height/25), 0);
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,2,"_2.png")));
+			} else {
+				GL11.glTranslatef(0, -0.02F + (height / 25), 0);
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 2, "_2.png")));
 
-		this.bipedLeftArm2.offsetX=0.02f;
-		this.bipedLeftArm2.render(f5);
-
-		GL11.glPopMatrix();
-	}
-		if (belt.rendModle(entity,2)){
-			GL11.glPushMatrix();
-		GL11.glScalef(1F*height, 1F*height, 1F*height);
-
-		if (entity.isSneaking()){
-			GL11.glTranslatef(0, 0.2F, 0);
-
-		}else {
-			GL11.glTranslatef(0, -0.02F+(height/25), 0);
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,5,"_1.png")));
-
-		this.bipedRightArm2.offsetX=-0.02f;
-		this.bipedRightArm2.render(f5);
-		GL11.glPopMatrix();
-	}
-		if (belt.rendModle(entity,3)){
-		GL11.glPushMatrix();
-		GL11.glScalef(0.9F*height, 0.9F*height, 0.9F*height);
-
-
-		if (entity.isSneaking()){
-			GL11.glTranslatef(0, 0.3F, 0);
-
-		}else {
-			GL11.glTranslatef(0, 0.12F, 0);
-
-
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,3,"_1.png")));
-		this.bipedLeftLeg2.offsetX=0.045f;
-		this.bipedLeftLeg2.render(f5);
-
-
-
-		GL11.glPopMatrix();
-	}
-		if (belt.rendModle(entity,6)){
-		GL11.glPushMatrix();
-		GL11.glScalef(0.9F*height, 0.9F*height, 0.9F*height);
-
-		if (entity.isSneaking()){
-			GL11.glTranslatef(0, 0.3F, 0);
-
-		}else {
-			GL11.glTranslatef(0, 0.12F, 0);
-
-		}
-		
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,6,"_2.png")));
-		this.bipedRightLeg2.offsetX=-0.045f;
-		this.bipedRightLeg2.render(f5);
-		GL11.glPopMatrix();
-		
-		GL11.glPushMatrix();
-		}
-		if (belt.rendModle(entity,1)){
-		GL11.glPushMatrix();
-		GL11.glScalef(1F*height, 1F*height, 1F*height);
-		if(entity.isSneaking()){
-			GL11.glTranslatef(0, 0.17F, -0.02f);
-		}else{
-			GL11.glTranslatef(0, -0F, 0);
-		}
-		GL11.glTranslatef(0,height2-(height2/10),0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,1,"_1.png")));
-		
-		this.bipedHead2.render(f5);
-		this.bipedHeadwear2.render(f5);
+			this.bipedLeftArm2.offsetX = 0.02f;
+			this.bipedLeftArm2.render(f5);
 
 			GL11.glPopMatrix();
 		}
-		if (belt.rendModle(entity,7)){
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0, 0.05F, 0);
+		if (belt.rendModle(entity, 2)) {
+			GL11.glPushMatrix();
+			GL11.glScalef(1F * height, 1F * height, 1F * height);
 
-		GL11.glScalef(1F*height, 1F*height, 1F*height);
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.2F, 0);
 
-		if (entity.isSneaking()){
-			this.bipedBody3.offsetZ=0.0f;
-			this.bipedBody3.offsetY=0.18f;
+			} else {
+				GL11.glTranslatef(0, -0.02F + (height / 25), 0);
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 5, "_1.png")));
 
-		}else {
-			this.bipedBody3.offsetZ=0.00025f;
+			this.bipedRightArm2.offsetX = -0.02f;
+			this.bipedRightArm2.render(f5);
+			GL11.glPopMatrix();
 		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,7,"_1.png")));
-		this.bipedBody3.render(f5);
+		if (belt.rendModle(entity, 3)) {
+			GL11.glPushMatrix();
+			GL11.glScalef(0.9F * height, 0.9F * height, 0.9F * height);
 
 
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,8)){
-		GL11.glPushMatrix();
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.3F, 0);
+
+			} else {
+				GL11.glTranslatef(0, 0.12F, 0);
 
 
-		GL11.glScalef(0.9F*height, 0.9F*height, 0.9F*height);
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 3, "_1.png")));
+			this.bipedLeftLeg2.offsetX = 0.045f;
+			this.bipedLeftLeg2.render(f5);
 
-		if(entity.isSneaking()){
-			this.bipedBody2.offsetZ=-0.0f;
-			this.bipedBody2.offsetY=0.25f;
-		}else{
-			this.bipedBody2.offsetZ=0.00025f;
-			this.bipedBody2.offsetY=0.05f;
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,8,"_2.png")));
-		this.bipedBody2.render(f5);
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,4)){
-		//line x2
-		GL11.glPushMatrix();
-		GL11.glScalef(1.1F*height, 1.1F*height, 1.1F*height);
-
-		if (entity.isSneaking()){
-			GL11.glTranslatef(0, 0.15F, 0f);
-
-		}else {
-			GL11.glTranslatef(0, -0.02F+(height/25), 0);
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,4,"_2.png")));
-
-		this.bigBipedLeftArm2.render(f5);
-
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,9)){
-		GL11.glPushMatrix();
-		GL11.glScalef(1.1F*height, 1.1F*height, 1.1F*height);
-
-		if (entity.isSneaking()){
-			GL11.glTranslatef(0, 0.15F, 0);
-
-		}else {
-			GL11.glTranslatef(0, -0.02F+(height/25), 0);
-
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,9,"_1.png")));
-
-		
-		this.bigBipedRightArm2.render(f5);
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,10)){
-		GL11.glPushMatrix();
-		GL11.glScalef(1F*height, 1F*height, 1F*height);
-
-		if (entity.isSneaking()){
-			GL11.glTranslatef(0, 0.2F, -0.02f);
-
-		}else {
-			GL11.glTranslatef(0, 0.0F, 0);
-		}
-
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,10,"_1.png")));
-		this.bigBipedLeftLeg2.offsetX=0.045f;
-		this.bigBipedLeftLeg2.render(f5);
-
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,11)){
-		GL11.glPushMatrix();
-		GL11.glScalef(1F*height, 1F*height, 1F*height);
-
-
-		if (entity.isSneaking()){
-			GL11.glTranslatef(0, 0.2F, -0.02f);
-
-		}else {
-			GL11.glTranslatef(0, 0F, 0);
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,11,"_2.png")));
-		this.bigBipedRightLeg2.offsetX=-0.045f;
-		this.bigBipedRightLeg2.render(f5);
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,12)){
-			
-		GL11.glPushMatrix();
-		GL11.glScalef(1.001F*height, 1.001F*height, 1.001F*height);
-		if(entity.isSneaking()){
-			GL11.glTranslatef(0, 0.17F, -0.02f);
-		}else{
-			GL11.glTranslatef(0, -0F, 0);
-		}
-		GL11.glTranslatef(0,height2-(height2/10),0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,12,"_1.png")));
-		
-		this.bigBipedHead2.render(f5);
-		this.bigBipedHeadwear2.render(f5);
 
 			GL11.glPopMatrix();
 		}
-		if (belt.rendModle(entity,13)){
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0, 0.05F, 0);
-
-		GL11.glScalef(1.000000001F*height, 1.000000001F*height, 1.000000001F*height);
-
-		if (entity.isSneaking()){
-			this.bigBipedBody3.offsetZ=0.0f;
-			this.bigBipedBody3.offsetY=0.18f;
-
-		}else {
-			this.bigBipedBody3.offsetZ=0.00025f;
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,13,"_1.png")));
-		this.bigBipedBody3.render(f5);
-
-
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,14)){
+		if (belt.rendModle(entity, 6)) {
 			GL11.glPushMatrix();
+			GL11.glScalef(0.9F * height, 0.9F * height, 0.9F * height);
 
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.3F, 0);
 
-		GL11.glScalef(0.901F*height, 0.901F*height, 0.901F*height);
+			} else {
+				GL11.glTranslatef(0, 0.12F, 0);
 
-		if(entity.isSneaking()){
-			this.bigBipedBody2.offsetZ=-0.0f;
-			this.bigBipedBody2.offsetY=0.25f;
-		}else{
-			this.bigBipedBody2.offsetZ=0.00025f;
-			this.bigBipedBody2.offsetY=0.05f;
-		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,14,"_2.png")));
-		this.bigBipedBody2.render(f5);
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,15)){
+			}
+
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 6, "_2.png")));
+			this.bipedRightLeg2.offsetX = -0.045f;
+			this.bipedRightLeg2.render(f5);
+			GL11.glPopMatrix();
+
 			GL11.glPushMatrix();
-		GL11.glTranslatef(0, 0.05F, 0);
-
-		GL11.glScalef(1.000000002F*height, 1.000000002F*height, 1.000000002F*height);
-
-		if (entity.isSneaking()){
-			this.big2BipedBody3.offsetZ=0.0f;
-			this.big2BipedBody3.offsetY=0.18f;
-
-		}else {
-			this.big2BipedBody3.offsetZ=0.00025f;
 		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,15,"_1.png")));
-		this.big2BipedBody3.render(f5);
+		if (belt.rendModle(entity, 1)) {
+			GL11.glPushMatrix();
+			GL11.glScalef(1F * height, 1F * height, 1F * height);
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.17F, -0.02f);
+			} else {
+				GL11.glTranslatef(0, -0F, 0);
+			}
+			GL11.glTranslatef(0, height2 - (height2 / 10), 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 1, "_1.png")));
 
-
-		GL11.glPopMatrix();
-		}
-		if (belt.rendModle(entity,17)){
-		GL11.glPushMatrix();
-		GL11.glScalef(1.002F*height, 1.002F*height, 1.002F*height);
-		if(entity.isSneaking()){
-			GL11.glTranslatef(0, 0.17F, -0.02f);
-		}else{
-			GL11.glTranslatef(0, -0F, 0);
-		}
-		GL11.glTranslatef(0,height2-(height2/10),0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,17,"_1.png")));
-		
-		this.big2BipedHead2.render(f5);
-		this.big2BipedHeadwear2.render(f5);
+			this.bipedHead2.render(f5);
+			this.bipedHeadwear2.render(f5);
 
 			GL11.glPopMatrix();
 		}
-		
-		if (belt.rendModle(entity,16)){
-		GL11.glPushMatrix();
-		GL11.glScalef(0.902F*height, 0.902F*height, 0.902F*height);
+		if (belt.rendModle(entity, 7)) {
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0, 0.05F, 0);
 
-		if(entity.isSneaking()){
-			this.big2BipedBody2.offsetZ=-0.0f;
-			this.big2BipedBody2.offsetY=0.25f;
-		}else{
-			this.big2BipedBody2.offsetZ=0.00025f;
-			this.big2BipedBody2.offsetY=0.05f;
+			GL11.glScalef(1F * height, 1F * height, 1F * height);
+
+			if (entity.isSneaking()) {
+				this.bipedBody3.offsetZ = 0.0f;
+				this.bipedBody3.offsetY = 0.18f;
+
+			} else {
+				this.bipedBody3.offsetZ = 0.00025f;
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 7, "_1.png")));
+			this.bipedBody3.render(f5);
+
+
+			GL11.glPopMatrix();
 		}
-		GL11.glTranslatef(0,height2,0);
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity,16,"_2.png")));
-		this.big2BipedBody2.render(f5);
-		GL11.glPopMatrix();
+		if (belt.rendModle(entity, 8)) {
+			GL11.glPushMatrix();
+
+
+			GL11.glScalef(0.9F * height, 0.9F * height, 0.9F * height);
+
+			if (entity.isSneaking()) {
+				this.bipedBody2.offsetZ = -0.0f;
+				this.bipedBody2.offsetY = 0.25f;
+			} else {
+				this.bipedBody2.offsetZ = 0.00025f;
+				this.bipedBody2.offsetY = 0.05f;
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 8, "_2.png")));
+			this.bipedBody2.render(f5);
+			GL11.glPopMatrix();
 		}
-		
+		if (belt.rendModle(entity, 4)) {
+			//line x2
+			GL11.glPushMatrix();
+			GL11.glScalef(1.1F * height, 1.1F * height, 1.1F * height);
+
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.15F, 0f);
+
+			} else {
+				GL11.glTranslatef(0, -0.02F + (height / 25), 0);
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 4, "_2.png")));
+
+			this.bigBipedLeftArm2.render(f5);
+
+			GL11.glPopMatrix();
+		}
+		if (belt.rendModle(entity, 9)) {
+			GL11.glPushMatrix();
+			GL11.glScalef(1.1F * height, 1.1F * height, 1.1F * height);
+
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.15F, 0);
+
+			} else {
+				GL11.glTranslatef(0, -0.02F + (height / 25), 0);
+
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 9, "_1.png")));
+
+
+			this.bigBipedRightArm2.render(f5);
+			GL11.glPopMatrix();
+		}
+		if (belt.rendModle(entity, 10)) {
+			GL11.glPushMatrix();
+			GL11.glScalef(1F * height, 1F * height, 1F * height);
+
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.2F, -0.02f);
+
+			} else {
+				GL11.glTranslatef(0, 0.0F, 0);
+			}
+
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 10, "_1.png")));
+			this.bigBipedLeftLeg2.offsetX = 0.045f;
+			this.bigBipedLeftLeg2.render(f5);
+
+			GL11.glPopMatrix();
+		}
+		if (belt.rendModle(entity, 11)) {
+			GL11.glPushMatrix();
+			GL11.glScalef(1F * height, 1F * height, 1F * height);
+
+
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.2F, -0.02f);
+
+			} else {
+				GL11.glTranslatef(0, 0F, 0);
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 11, "_2.png")));
+			this.bigBipedRightLeg2.offsetX = -0.045f;
+			this.bigBipedRightLeg2.render(f5);
+			GL11.glPopMatrix();
+		}
+		if (belt.rendModle(entity, 12)) {
+
+			GL11.glPushMatrix();
+			GL11.glScalef(1.001F * height, 1.001F * height, 1.001F * height);
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.17F, -0.02f);
+			} else {
+				GL11.glTranslatef(0, -0F, 0);
+			}
+			GL11.glTranslatef(0, height2 - (height2 / 10), 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 12, "_1.png")));
+
+			this.bigBipedHead2.render(f5);
+			this.bigBipedHeadwear2.render(f5);
+
+			GL11.glPopMatrix();
+		}
+		if (belt.rendModle(entity, 13)) {
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0, 0.05F, 0);
+
+			GL11.glScalef(1.000000001F * height, 1.000000001F * height, 1.000000001F * height);
+
+			if (entity.isSneaking()) {
+				this.bigBipedBody3.offsetZ = 0.0f;
+				this.bigBipedBody3.offsetY = 0.18f;
+
+			} else {
+				this.bigBipedBody3.offsetZ = 0.00025f;
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 13, "_1.png")));
+			this.bigBipedBody3.render(f5);
+
+
+			GL11.glPopMatrix();
+		}
+		if (belt.rendModle(entity, 14)) {
+			GL11.glPushMatrix();
+
+
+			GL11.glScalef(0.901F * height, 0.901F * height, 0.901F * height);
+
+			if (entity.isSneaking()) {
+				this.bigBipedBody2.offsetZ = -0.0f;
+				this.bigBipedBody2.offsetY = 0.25f;
+			} else {
+				this.bigBipedBody2.offsetZ = 0.00025f;
+				this.bigBipedBody2.offsetY = 0.05f;
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 14, "_2.png")));
+			this.bigBipedBody2.render(f5);
+			GL11.glPopMatrix();
+		}
+		if (belt.rendModle(entity, 15)) {
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0, 0.05F, 0);
+
+			GL11.glScalef(1.000000002F * height, 1.000000002F * height, 1.000000002F * height);
+
+			if (entity.isSneaking()) {
+				this.big2BipedBody3.offsetZ = 0.0f;
+				this.big2BipedBody3.offsetY = 0.18f;
+
+			} else {
+				this.big2BipedBody3.offsetZ = 0.00025f;
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 15, "_1.png")));
+			this.big2BipedBody3.render(f5);
+
+
+			GL11.glPopMatrix();
+		}
+		if (belt.rendModle(entity, 17)) {
+			GL11.glPushMatrix();
+			GL11.glScalef(1.002F * height, 1.002F * height, 1.002F * height);
+			if (entity.isSneaking()) {
+				GL11.glTranslatef(0, 0.17F, -0.02f);
+			} else {
+				GL11.glTranslatef(0, -0F, 0);
+			}
+			GL11.glTranslatef(0, height2 - (height2 / 10), 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 17, "_1.png")));
+
+			this.big2BipedHead2.render(f5);
+			this.big2BipedHeadwear2.render(f5);
+
+			GL11.glPopMatrix();
+		}
+
+		if (belt.rendModle(entity, 16)) {
+			GL11.glPushMatrix();
+			GL11.glScalef(0.902F * height, 0.902F * height, 0.902F * height);
+
+			if (entity.isSneaking()) {
+				this.big2BipedBody2.offsetZ = -0.0f;
+				this.big2BipedBody2.offsetY = 0.25f;
+			} else {
+				this.big2BipedBody2.offsetZ = 0.00025f;
+				this.big2BipedBody2.offsetY = 0.05f;
+			}
+			GL11.glTranslatef(0, height2, 0);
+			Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(belt.getTexture(entity, 16, "_2.png")));
+			this.big2BipedBody2.render(f5);
+			GL11.glPopMatrix();
+		}
+
 		GL11.glPopMatrix();
 	}
 

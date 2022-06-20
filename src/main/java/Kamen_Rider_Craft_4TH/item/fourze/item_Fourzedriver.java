@@ -4,41 +4,29 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import org.lwjgl.opengl.GL11;
+import Kamen_Rider_Craft_4TH.item.rider_armor_base.RiderDriverItem;
 
-import Kamen_Rider_Craft_4TH.ReiwaRiderItems;
 import Kamen_Rider_Craft_4TH.RiderItems;
 import Kamen_Rider_Craft_4TH.ShowaRiderItems;
 import Kamen_Rider_Craft_4TH.TokuCraft_core;
 import Kamen_Rider_Craft_4TH.item.ooo.item_OOOdriver;
 import Kamen_Rider_Craft_4TH.item.rider_armor_base.Item_form_change;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_driver;
-import Kamen_Rider_Craft_4TH.item.zero_one.Item_progrise_keys;
-import Kamen_Rider_Craft_4TH.item.zero_one.item_zero_onedriver;
 import Kamen_Rider_Craft_4TH.model.Bipedswich;
 import Kamen_Rider_Craft_4TH.potion.PotionCore;
-import Kamen_Rider_Craft_4TH.util.IHasModel;
 import Kamen_Rider_Craft_4TH.util.Refercence;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -47,7 +35,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class item_Fourzedriver extends item_rider_driver
+public class item_Fourzedriver extends RiderDriverItem
 {
 	public static final String[] CoreName= new String[] {"base","elek","fire","magnet","cosmic","rocket","rocket_drill","meteor_fusion_states","meteor_nadeshiko_fusion_states","launcher"};
 
@@ -572,9 +560,9 @@ public class item_Fourzedriver extends item_rider_driver
 		if (entity instanceof EntityLivingBase){
 			EntityLivingBase player = ((EntityLivingBase)entity);
 			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET)!= null){
-				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof item_rider_driver){
-					item_rider_driver belt =((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
-					String rider = ((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
+				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof RiderDriverItem){
+					RiderDriverItem belt =((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
+					String rider = ((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
 
 					if (num==1||num==2||num==5||num==7||num==3||num==6||num==8){
 						

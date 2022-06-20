@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,6 +24,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
@@ -33,10 +35,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -113,24 +114,73 @@ public class Item_gun extends ItemBow  implements IHasModel
 		{
 			 EntityPlayer playerIn = (EntityPlayer)entityLiving;
 
-			if (!worldIn.isRemote)
-			{
-					Vec3d look =  playerIn.getLookVec();
-					ItemArrow itemarrow = (ItemArrow) Items.ARROW;
-					EntityArrow fireball = itemarrow.createArrow(worldIn, new ItemStack(Items.ARROW), playerIn);
-					fireball.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 3.0F, 1.0F);
-					fireball.motionX = look.x*3;
-					fireball.motionY = look.y*3;
-					fireball.motionZ = look.z*3;
-					fireball.pickupStatus= EntityArrow.PickupStatus.DISALLOWED;
-					worldIn.spawnEntity(fireball);
-					if (! playerIn.capabilities.isCreativeMode){
-					
-				}
+			if (!worldIn.isRemote) {
+				shoot(worldIn, playerIn, stack);
 			}
 
 			playerIn.addStat(StatList.getObjectUseStats(this));
 		}
+	}
+
+	protected void shoot(World worldIn, EntityPlayer playerIn, ItemStack stack) {
+		EntityArrow fireball = getArrowEntity(worldIn, playerIn);
+
+		int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+
+		if (j > 0) {
+			fireball.setDamage(fireball.getDamage() + (double) j * 0.5D + 0.5D);
+		}
+
+		int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+
+		if (k > 0) {
+			fireball.setKnockbackStrength(k);
+		}
+
+		if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
+			fireball.setFire(100);
+		}
+
+		worldIn.spawnEntity(fireball);
+	}
+
+	protected void damage(double damage, ItemStack stack, EntityPlayer player, EntityLivingBase target) {
+		double result = damage;
+
+		int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+
+		if (j > 0) {
+			result += (double) j * 0.5D + 0.5D;
+		}
+
+		int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+
+		if (k > 0) {
+			target.addVelocity(1 * k * 0.6000000238418579D / 1.41, 0.1D, 1 * k * 0.6000000238418579D / 1.41);
+		}
+
+		if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
+			target.setFire(100);
+		}
+
+		target.attackEntityFrom(DamageSource.causePlayerDamage(player),
+				getFinalDamage((float) result, stack, player, target));
+	}
+
+	protected float getFinalDamage(float damage, ItemStack stack, EntityPlayer player, EntityLivingBase target) {
+		return damage;
+	}
+
+	protected EntityArrow getArrowEntity(World worldIn, EntityPlayer playerIn) {
+		Vec3d look = playerIn.getLookVec();
+		ItemArrow itemarrow = (ItemArrow) Items.ARROW;
+		EntityArrow fireball = itemarrow.createArrow(worldIn, new ItemStack(Items.ARROW), playerIn);
+		fireball.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 3.0F, 1.0F);
+		fireball.motionX = look.x * 3;
+		fireball.motionY = look.y * 3;
+		fireball.motionZ = look.z * 3;
+		fireball.pickupStatus = EntityArrow.PickupStatus.DISALLOWED;
+		return fireball;
 	}
 
     /**

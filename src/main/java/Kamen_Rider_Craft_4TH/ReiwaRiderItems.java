@@ -5,30 +5,21 @@ import Kamen_Rider_Craft_4TH.item.ItemBaseSword;
 import Kamen_Rider_Craft_4TH.item.Item_gun;
 import Kamen_Rider_Craft_4TH.item.Item_ore;
 import Kamen_Rider_Craft_4TH.item.Item_sword_gun;
-import Kamen_Rider_Craft_4TH.item.Ichigo.item_Ichigoarmor;
-import Kamen_Rider_Craft_4TH.item.Ichigo.item_Ichigoarmor2;
-import Kamen_Rider_Craft_4TH.item.W.item_Wdriver;
 import Kamen_Rider_Craft_4TH.item.revice.Item_Vistamps;
 import Kamen_Rider_Craft_4TH.item.revice.item_revicedriver;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.Item_form_change;
 import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_armor;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_driver;
 import Kamen_Rider_Craft_4TH.item.saber.Item_haouken_xross_saber;
 import Kamen_Rider_Craft_4TH.item.saber.Item_wonder_ride_book;
 import Kamen_Rider_Craft_4TH.item.saber.item_book_gate_wonder_ride_book;
 import Kamen_Rider_Craft_4TH.item.saber.item_book_of_ruin;
 import Kamen_Rider_Craft_4TH.item.saber.item_diago_speedy;
-import Kamen_Rider_Craft_4TH.item.saber.item_saberarmor_head;
 import Kamen_Rider_Craft_4TH.item.saber.item_saberdriver;
 import Kamen_Rider_Craft_4TH.item.zero_one.Item_progrise_keys;
 import Kamen_Rider_Craft_4TH.item.zero_one.item_risephone;
 import Kamen_Rider_Craft_4TH.item.zero_one.item_zero_onedriver;
-import Kamen_Rider_Craft_4TH.potion.PotionCore;
-import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.potion.PotionEffect;
 
 public class ReiwaRiderItems {
 	//Zero-one

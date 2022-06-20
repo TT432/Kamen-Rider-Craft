@@ -6,24 +6,11 @@ import javax.annotation.Nullable;
 
 import Kamen_Rider_Craft_4TH.RiderItems;
 import Kamen_Rider_Craft_4TH.TokuCraft_core;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_driver;
+import Kamen_Rider_Craft_4TH.item.rider_armor_base.RiderDriverItem;
 import Kamen_Rider_Craft_4TH.util.IHasModel;
-import Kamen_Rider_Craft_4TH.util.Refercence;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ResourceLocation;
@@ -60,8 +47,8 @@ public class Item_kuuga_mode_change_sword_im extends ItemSword implements IHasMo
 	                    return 0.0F;
 	                }else if (entityIn.getItemStackFromSlot(EntityEquipmentSlot.FEET)!= null){
 
-					if (entityIn.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof item_rider_driver){
-						if (item_rider_driver.get_Form_Item_tex(entityIn.getItemStackFromSlot(EntityEquipmentSlot.FEET),1).getBelt()==RiderItems.arcle_u||item_rider_driver.get_Form_Item_tex(entityIn.getItemStackFromSlot(EntityEquipmentSlot.FEET),1).getBelt()==RiderItems.arcle_ru)
+					if (entityIn.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof RiderDriverItem){
+						if (RiderDriverItem.get_Form_Item_tex(entityIn.getItemStackFromSlot(EntityEquipmentSlot.FEET),1).getBelt()==RiderItems.arcle_u|| RiderDriverItem.get_Form_Item_tex(entityIn.getItemStackFromSlot(EntityEquipmentSlot.FEET),1).getBelt()==RiderItems.arcle_ru)
 							 return 1;
 					}else{
 						return 0;
