@@ -1,4 +1,4 @@
-package Kamen_Rider_Craft_4TH;
+package Kamen_Rider_Craft_4TH.core;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
@@ -19,7 +19,7 @@ public class MixinLoader implements IEarlyMixinLoader, IFMLLoadingPlugin {
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[]{"Kamen_Rider_Craft_4TH.EmptyTrans"};
+        return new String[]{"Kamen_Rider_Craft_4TH.core.EmptyTrans"};
     }
 
     @Override

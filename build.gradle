@@ -43,7 +43,7 @@ minecraft {
             property "mixin.debug.export", "true"
             property "mixin.hotSwap", "true"
             property "mixin.checks.interfaces", "true"
-            property "fml.coreMods.load", "Kamen_Rider_Craft_4TH.MixinLoader"
+            property "fml.coreMods.load", "Kamen_Rider_Craft_4TH.core.MixinLoader"
         }
 
         server {
@@ -78,6 +78,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:Baubles-227083:2518667")
     implementation fg.deobf("zone.rong:mixinbooter:4.2")
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 mixin {
@@ -94,7 +96,7 @@ jar {
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "examplemodsareus",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "FMLCorePlugin": "Kamen_Rider_Craft_4TH.MixinLoader",
+                "FMLCorePlugin": "Kamen_Rider_Craft_4TH.core.MixinLoader",
                 "FMLCorePluginContainsFMLMod": true
         ])
     }
