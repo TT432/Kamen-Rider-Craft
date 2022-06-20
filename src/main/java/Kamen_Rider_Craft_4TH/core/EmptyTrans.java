@@ -1,4 +1,4 @@
-package Kamen_Rider_Craft_4TH;
+package Kamen_Rider_Craft_4TH.core;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 

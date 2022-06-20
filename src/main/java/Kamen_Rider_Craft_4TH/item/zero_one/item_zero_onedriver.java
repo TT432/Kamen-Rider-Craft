@@ -166,7 +166,7 @@ public class item_zero_onedriver extends RiderDriverItem
 
 	public static String GetRider(EntityLivingBase player)
 	{
-		String rider = ((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
+		String rider = ((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
 
 		if (rider=="thouser"&player.isPotionActive(PotionCore.BUGSTER_POTION)){
 			rider="zaia";
