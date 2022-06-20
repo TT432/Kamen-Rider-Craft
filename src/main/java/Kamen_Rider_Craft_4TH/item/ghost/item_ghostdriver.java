@@ -2,43 +2,33 @@ package Kamen_Rider_Craft_4TH.item.ghost;
 
 import javax.annotation.Nullable;
 
-import org.lwjgl.opengl.GL11;
+import Kamen_Rider_Craft_4TH.item.rider_armor_base.RiderDriverItem;
 
 import Kamen_Rider_Craft_4TH.RiderItems;
 import Kamen_Rider_Craft_4TH.ShowaRiderItems;
 import Kamen_Rider_Craft_4TH.TokuCraft_core;
-import Kamen_Rider_Craft_4TH.item.Ex_Aid.item_ex_aiddriver;
 import Kamen_Rider_Craft_4TH.item.ooo.item_OOOdriver;
-import Kamen_Rider_Craft_4TH.item.revice.item_revicedriver;
 import Kamen_Rider_Craft_4TH.item.rider_armor_base.Item_form_change;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_driver;
 import Kamen_Rider_Craft_4TH.model.model_belt_plus;
 import Kamen_Rider_Craft_4TH.potion.PotionCore;
-import Kamen_Rider_Craft_4TH.util.IHasModel;
 import Kamen_Rider_Craft_4TH.util.Refercence;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class item_ghostdriver extends item_rider_driver
+public class item_ghostdriver extends RiderDriverItem
 {
 
 	private static final int[] maxDamageArray = new int[] {11, 16, 15, 13};
@@ -155,16 +145,17 @@ public class item_ghostdriver extends item_rider_driver
 		itemstack.getTagCompound().setInteger("icon", flag);
 		itemstack.getTagCompound().setInteger("rider", rider);
 	}
-	public  boolean rendModle(Entity entity, int num)
+	@Override
+    public  boolean rendModle(Entity entity, int num)
 	{
 		if (num==2||num==5||num==7||num==1||num==3||num==6||num==8){
 			return true;
 		}else if (entity instanceof EntityLivingBase){
 			EntityLivingBase player = ((EntityLivingBase)entity);
 			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET)!= null){
-				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof item_rider_driver){
-					item_rider_driver belt =((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
-					String rider = ((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
+				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof RiderDriverItem){
+					RiderDriverItem belt =((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
+					String rider = ((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
 
 					 if (num==4||num==9||num==10||num==11||num==12||num==13||num==14){
 
@@ -431,9 +422,9 @@ public class item_ghostdriver extends item_rider_driver
 		if (entity instanceof EntityLivingBase){
 			EntityLivingBase player = ((EntityLivingBase)entity);
 			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET)!= null){
-				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof item_rider_driver){
-					item_rider_driver belt =((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
-					String rider = ((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
+				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof RiderDriverItem){
+					RiderDriverItem belt =((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
+					String rider = ((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
 
 					
 					 if (num==2||num==5||num==3||num==6||num==8||num==12){

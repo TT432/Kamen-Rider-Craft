@@ -4,25 +4,19 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import org.lwjgl.opengl.GL11;
+import Kamen_Rider_Craft_4TH.item.rider_armor_base.RiderDriverItem;
 
 import Kamen_Rider_Craft_4TH.RiderItems;
 import Kamen_Rider_Craft_4TH.ShowaRiderItems;
 import Kamen_Rider_Craft_4TH.TokuCraft_core;
 import Kamen_Rider_Craft_4TH.item.ooo.item_OOOdriver;
 import Kamen_Rider_Craft_4TH.item.rider_armor_base.Item_form_change;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_driver;
 import Kamen_Rider_Craft_4TH.model.model_belt_plus;
 import Kamen_Rider_Craft_4TH.potion.PotionCore;
-import Kamen_Rider_Craft_4TH.util.IHasModel;
 import Kamen_Rider_Craft_4TH.util.Refercence;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -30,17 +24,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.sound.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class item_builddriver extends item_rider_driver
+public class item_builddriver extends RiderDriverItem
 {
 	public static final String[] CoreName= new String[] {"tank","diamond","gatling","soujiki","comic","rocket","shoubousha","key","light","robo","televi","smartphone","camera","helicopter","ufo","jet","cyclone","eraser","watch","pyramid","skateboard","fridge","dragon_silver","engine","bike","magnet","submarine","dryer","gold"};
 	public static final String[] CoreName2= new String[] {"rabbit","gorilla","taka","harinezumi","ninnin","panda","lion","dragon","orange","octopus","phoenix","kuma","wolf","beetle","rose","tora","kujira","kirin","unicorn","turtle","deer","penguin","spider","rabbit_gold","bat","same","hachi","sai","scorpion"};		
@@ -818,16 +809,17 @@ public class item_builddriver extends item_rider_driver
 		}
 	}
 
-	public  boolean rendModle(Entity entity, int num)
+	@Override
+    public  boolean rendModle(Entity entity, int num)
 	{
 		if (num==2||num==5||num==7||num==1||num==3||num==6||num==8){
 			return true;
 		}else if (entity instanceof EntityLivingBase){
 			EntityLivingBase player = ((EntityLivingBase)entity);
 			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET)!= null){
-				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof item_rider_driver){
-					item_rider_driver belt =((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
-					String rider = ((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
+				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof RiderDriverItem){
+					RiderDriverItem belt =((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
+					String rider = ((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
 
 					 if (num==4||num==9||num==10||num==11||num==12||num==13||num==14){
 
@@ -853,8 +845,8 @@ public class item_builddriver extends item_rider_driver
 	{
 		if (entity instanceof EntityLivingBase){
 			EntityLivingBase player = ((EntityLivingBase)entity);
-			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof item_rider_driver){
-				item_rider_driver belt =((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
+			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof RiderDriverItem){
+				RiderDriverItem belt =((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
 
 				if (num==8){
 					if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == RiderItems.build_driver||player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == RiderItems.build_driver_cross_z||player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == RiderItems.sclash_driver_grease||player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() == RiderItems.sclash_driver_cross_z_charge){

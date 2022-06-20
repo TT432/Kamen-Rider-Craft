@@ -2,11 +2,11 @@ package Kamen_Rider_Craft_4TH.item.agito;
 
 import Kamen_Rider_Craft_4TH.RiderItems;
 import Kamen_Rider_Craft_4TH.item.rider_armor_base.Item_form_change;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_driver;
+import Kamen_Rider_Craft_4TH.item.rider_armor_base.RiderDriverItem;
 import Kamen_Rider_Craft_4TH.util.IHasModel;
 import net.minecraft.item.ItemStack;
 
-public class item_agitodriver extends item_rider_driver implements IHasModel
+public class item_agitodriver extends RiderDriverItem implements IHasModel
 {
 
 	private static final int[] maxDamageArray = new int[] {11, 16, 15, 13};

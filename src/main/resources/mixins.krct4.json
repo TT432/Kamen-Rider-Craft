@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "Kamen_Rider_Craft_4TH.mixin",
+  "minVersion": "0.8",
+  "setSourceFile": true,
+  "priority": 0,
+  "refmap": "mixins.krct4.refmap.json",
+  "mixins": [
+    "MixinLayerArmor"
+  ]
+}

@@ -5,10 +5,8 @@ import Kamen_Rider_Craft_4TH.ShowaRiderItems;
 import Kamen_Rider_Craft_4TH.TokuCraft_core;
 import Kamen_Rider_Craft_4TH.item.ooo.item_OOOdriver;
 import Kamen_Rider_Craft_4TH.item.rider_armor_base.Item_form_change;
-import Kamen_Rider_Craft_4TH.item.rider_armor_base.item_rider_driver;
-import Kamen_Rider_Craft_4TH.item.wizard.item_wizarddriver;
+import Kamen_Rider_Craft_4TH.item.rider_armor_base.RiderDriverItem;
 import Kamen_Rider_Craft_4TH.model.model_belt;
-import Kamen_Rider_Craft_4TH.util.IHasModel;
 import Kamen_Rider_Craft_4TH.util.Refercence;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
@@ -26,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class item_amazonsdriver extends item_rider_driver
+public class item_amazonsdriver extends RiderDriverItem
 {
 
 	private static final int[] maxDamageArray = new int[] {11, 16, 15, 13};
@@ -171,16 +169,17 @@ public class item_amazonsdriver extends item_rider_driver
 		return null;
 	}
 
-	public  boolean rendModle(Entity entity, int num)
+	@Override
+    public  boolean rendModle(Entity entity, int num)
 	{
 		if (num==2||num==5||num==7||num==1||num==3||num==6||num==8){
 			return true;
 		}else if (entity instanceof EntityLivingBase){
 			EntityLivingBase player = ((EntityLivingBase)entity);
 			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET)!= null){
-				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof item_rider_driver){
-					item_rider_driver belt =((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
-					String rider = ((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
+				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof RiderDriverItem){
+					RiderDriverItem belt =((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
+					String rider = ((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
 
 					 if (num==4||num==9||num==10||num==11||num==12||num==13||num==14){
 
@@ -235,9 +234,9 @@ public class item_amazonsdriver extends item_rider_driver
 		if (entity instanceof EntityLivingBase){
 			EntityLivingBase player = ((EntityLivingBase)entity);
 			if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET)!= null){
-				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof item_rider_driver){
-					item_rider_driver belt =((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
-					String rider = ((item_rider_driver)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
+				if (player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()instanceof RiderDriverItem){
+					RiderDriverItem belt =((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem());
+					String rider = ((RiderDriverItem)player.getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem()).Rider;
 
 					if (num==1||num==2||num==5||num==7||num==3||num==6||num==8){
 						
